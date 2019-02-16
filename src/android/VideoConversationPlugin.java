@@ -15,6 +15,7 @@ import org.json.JSONException;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.ekreative.cordova.videoconversations.ConversationActivity;
 
@@ -44,6 +45,9 @@ public class VideoConversationPlugin extends CordovaPlugin {
 
 	public void openRoom(final JSONArray args) {
         try {
+		Toast.makeText(this,
+                        "openRoom",
+                        Toast.LENGTH_LONG).show();
             this.roomId = args.getString(0);
             this.token = args.getString(1);
             final CordovaPlugin that = this;
@@ -55,6 +59,10 @@ public class VideoConversationPlugin extends CordovaPlugin {
      		cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
 
+			Toast.makeText(this,
+                        "preparing activity with token " + token,
+                        Toast.LENGTH_LONG).show();
+			
                     Intent intentTwilioVideo = new Intent(that.cordova.getActivity().getBaseContext(), ConversationActivity.class);
         			intentTwilioVideo.putExtra("token", token);
                     intentTwilioVideo.putExtra("roomId", roomId);
@@ -66,7 +74,10 @@ public class VideoConversationPlugin extends CordovaPlugin {
                 }
                     
             });
-        } catch (JSONException e) {
+        } catch (Exception e) {
+		Toast.makeText(this,
+                        e.getMessage(),
+                        Toast.LENGTH_LONG).show();
             //Log.e(TAG, "Invalid JSON string: " + json, e);
             //return null;
         }
