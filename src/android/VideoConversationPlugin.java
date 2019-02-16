@@ -16,6 +16,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.ekreative.cordova.videoconversations.ConversationActivity;
 
 public class VideoConversationPlugin extends CordovaPlugin {
 
