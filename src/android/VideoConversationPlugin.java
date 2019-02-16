@@ -45,7 +45,7 @@ public class VideoConversationPlugin extends CordovaPlugin {
 
 	public void openRoom(final JSONArray args) {
         try {
-		Toast.makeText(callbackContext,
+		Toast.makeText(cordova.getActivity(),
                         "openRoom",
                         Toast.LENGTH_LONG).show();
             this.roomId = args.getString(0);
@@ -59,7 +59,7 @@ public class VideoConversationPlugin extends CordovaPlugin {
      		cordova.getThreadPool().execute(new Runnable() {
                 public void run() {
 
-			Toast.makeText(callbackContext,
+			Toast.makeText(cordova.getActivity(),
                         "preparing activity with token " + token,
                         Toast.LENGTH_LONG).show();
 			
@@ -75,7 +75,7 @@ public class VideoConversationPlugin extends CordovaPlugin {
                     
             });
         } catch (Exception e) {
-		Toast.makeText(callbackContext,
+		Toast.makeText(cordova.getActivity(),
                         e.getMessage(),
                         Toast.LENGTH_LONG).show();
             //Log.e(TAG, "Invalid JSON string: " + json, e);
