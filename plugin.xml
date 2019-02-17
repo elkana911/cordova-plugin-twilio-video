@@ -50,7 +50,7 @@
         <hook type="after_plugin_install" src="hooks/after_plugin_install/hook-add-r-import.js" />
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="VideoConversationPlugin">
-                <param name="android-package" value="cordova-plugin-twilio-video.VideoConversationPlugin" />
+                <param name="android-package" value="com.ekreative.cordova.videoconversations.VideoConversationPlugin" />
             </feature>
         </config-file>
         <config-file target="AndroidManifest.xml" parent="/*">
