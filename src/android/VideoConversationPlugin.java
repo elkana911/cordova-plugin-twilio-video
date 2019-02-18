@@ -51,10 +51,6 @@ public class VideoConversationPlugin extends CordovaPlugin {
             final String token = this.token;
             final String roomId = this.roomId;
 
-			Toast.makeText(webView.getContext(),
-                        "preparing activity with token " + token,
-                        Toast.LENGTH_LONG).show();
-
             LOG.d("TOKEN", token);
             LOG.d("ROOMID", roomId);
      		cordova.getThreadPool().execute(new Runnable() {
@@ -71,10 +67,7 @@ public class VideoConversationPlugin extends CordovaPlugin {
                 }
                     
             });
-        } catch (Exception e) {
-		Toast.makeText(webView.getContext(),
-                        e.getMessage(),
-                        Toast.LENGTH_LONG).show();
+        } catch (Exception e) {		
             //Log.e(TAG, "Invalid JSON string: " + json, e);
             //return null;
         }
