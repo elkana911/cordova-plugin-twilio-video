@@ -40,6 +40,8 @@ import com.twilio.video.Room;
 import com.twilio.video.VideoTrack;
 import com.twilio.video.VideoView;
 
+import com.twilio.video.RemoteVideoTrackPublication;
+
 import com.ekreative.cordova.videoconversations.FakeR;
 	
 import java.util.Collections;
@@ -370,8 +372,18 @@ public class ConversationActivity extends AppCompatActivity {
         /*
          * Add participant renderer
          */
-        if (participant.getVideoTracks().size() > 0) {
-            addParticipantVideo(participant.getVideoTracks().get(0));
+        if (participant.getRemoteVideoTracks().size() > 0) {
+           // addParticipantVideo(participant.getVideoTracks().get(0));
+	    RemoteVideoTrackPublication remoteVideoTrackPublication =
+                    remoteParticipant.getRemoteVideoTracks().get(0);
+
+            /*
+             * Only render video tracks that are subscribed to
+             */
+            if (remoteVideoTrackPublication.isTrackSubscribed()) {
+                addParticipantVideo(remoteVideoTrackPublication.getRemoteVideoTrack());
+            }	
+		
         }
 
         /*
