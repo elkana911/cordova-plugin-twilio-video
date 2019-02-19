@@ -185,7 +185,7 @@ public class ConversationActivity extends AppCompatActivity {
              * If connected to a Room then share the local video track.
              */
             if (localParticipant != null) {
-                localParticipant.addVideoTrack(localVideoTrack);
+                localParticipant.publishTrack(localVideoTrack);
             }
         }
     }
