@@ -42,6 +42,7 @@ import com.twilio.video.VideoView;
 
 import com.twilio.video.RemoteAudioTrackPublication;
 import com.twilio.video.RemoteVideoTrackPublication;
+import com.twilio.video.RemoteDataTrackPublication;
 
 import com.ekreative.cordova.videoconversations.FakeR;
 	
