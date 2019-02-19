@@ -375,7 +375,7 @@ public class ConversationActivity extends AppCompatActivity {
         if (participant.getRemoteVideoTracks().size() > 0) {
            // addParticipantVideo(participant.getVideoTracks().get(0));
 	    RemoteVideoTrackPublication remoteVideoTrackPublication =
-                    remoteParticipant.getRemoteVideoTracks().get(0);
+                    participant.getRemoteVideoTracks().get(0);
 
             /*
              * Only render video tracks that are subscribed to
