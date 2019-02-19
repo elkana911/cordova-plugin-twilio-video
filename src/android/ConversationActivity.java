@@ -35,7 +35,7 @@ import com.twilio.video.CameraCapturer.CameraSource;
 import com.twilio.video.ConnectOptions;
 import com.twilio.video.LocalAudioTrack;
 import com.twilio.video.LocalVideoTrack;
-import com.twilio.video.Participant;
+import com.twilio.video.RemoteParticipant;
 import com.twilio.video.Room;
 import com.twilio.video.VideoTrack;
 import com.twilio.video.VideoView;
@@ -352,7 +352,7 @@ public class ConversationActivity extends AppCompatActivity {
     /*
      * Called when participant joins the room
      */
-    private void addParticipant(Participant participant) {
+    private void addParticipant(RemoteParticipant participant) {
         /*
          * This app only displays video for one additional participant per Room
          */
@@ -403,7 +403,7 @@ public class ConversationActivity extends AppCompatActivity {
     /*
      * Called when participant leaves the room
      */
-    private void removeParticipant(Participant participant) {
+    private void removeParticipant(RemoteParticipant participant) {
      //   videoStatusTextView.setText("Participant "+participant.getIdentity()+ " left.");
         if (!participant.getIdentity().equals(participantIdentity)) {
             return;
@@ -503,52 +503,143 @@ public class ConversationActivity extends AppCompatActivity {
         };
     }
 
-    private Participant.Listener participantListener() {
-        return new Participant.Listener() {
+    private RemoteParticipant.Listener remoteParticipantListener() {
+        return new RemoteParticipant.Listener() {
             @Override
-            public void onAudioTrackAdded(Participant participant, AudioTrack audioTrack) {
-         //       videoStatusTextView.setText("onAudioTrackAdded");
+            public void onAudioTrackPublished(RemoteParticipant remoteParticipant,
+                                              RemoteAudioTrackPublication remoteAudioTrackPublication) {
+                //videoStatusTextView.setText("onAudioTrackPublished");
             }
 
             @Override
-            public void onAudioTrackRemoved(Participant participant, AudioTrack audioTrack) {
-           //     videoStatusTextView.setText("onAudioTrackRemoved");
+            public void onAudioTrackUnpublished(RemoteParticipant remoteParticipant,
+                                                RemoteAudioTrackPublication remoteAudioTrackPublication) {
+               // videoStatusTextView.setText("onAudioTrackUnpublished");
             }
 
             @Override
-            public void onVideoTrackAdded(Participant participant, VideoTrack videoTrack) {
-              //  videoStatusTextView.setText("");
-                addParticipantVideo(videoTrack);
+            public void onDataTrackPublished(RemoteParticipant remoteParticipant,
+                                             RemoteDataTrackPublication remoteDataTrackPublication) {
+                //videoStatusTextView.setText("onDataTrackPublished");
             }
 
             @Override
-            public void onVideoTrackRemoved(Participant participant, VideoTrack videoTrack) {
-               // videoStatusTextView.setText("Participant disconnected");
-                removeParticipantVideo(videoTrack);
+            public void onDataTrackUnpublished(RemoteParticipant remoteParticipant,
+                                               RemoteDataTrackPublication remoteDataTrackPublication) {              
+                //videoStatusTextView.setText("onDataTrackUnpublished");
             }
 
             @Override
-            public void onAudioTrackEnabled(Participant participant, AudioTrack audioTrack) {
+            public void onVideoTrackPublished(RemoteParticipant remoteParticipant,
+                                              RemoteVideoTrackPublication remoteVideoTrackPublication) {              
+                //videoStatusTextView.setText("onVideoTrackPublished");
+            }
+
+            @Override
+            public void onVideoTrackUnpublished(RemoteParticipant remoteParticipant,
+                                                RemoteVideoTrackPublication remoteVideoTrackPublication) {           
+                //videoStatusTextView.setText("onVideoTrackUnpublished");
+            }
+
+            @Override
+            public void onAudioTrackSubscribed(RemoteParticipant remoteParticipant,
+                                               RemoteAudioTrackPublication remoteAudioTrackPublication,
+                                               RemoteAudioTrack remoteAudioTrack) {            
+               // videoStatusTextView.setText("onAudioTrackSubscribed");
+            }
+
+            @Override
+            public void onAudioTrackUnsubscribed(RemoteParticipant remoteParticipant,
+                                                 RemoteAudioTrackPublication remoteAudioTrackPublication,
+                                                 RemoteAudioTrack remoteAudioTrack) {
+               
+               // videoStatusTextView.setText("onAudioTrackUnsubscribed");
+            }
+
+            @Override
+            public void onAudioTrackSubscriptionFailed(RemoteParticipant remoteParticipant,
+                                                       RemoteAudioTrackPublication remoteAudioTrackPublication,
+                                                       TwilioException twilioException) {
+               
+                //videoStatusTextView.setText("onAudioTrackSubscriptionFailed");
+            }
+
+            @Override
+            public void onDataTrackSubscribed(RemoteParticipant remoteParticipant,
+                                              RemoteDataTrackPublication remoteDataTrackPublication,
+                                              RemoteDataTrack remoteDataTrack) {
+               
+               // videoStatusTextView.setText("onDataTrackSubscribed");
+            }
+
+            @Override
+            public void onDataTrackUnsubscribed(RemoteParticipant remoteParticipant,
+                                                RemoteDataTrackPublication remoteDataTrackPublication,
+                                                RemoteDataTrack remoteDataTrack) {
+              
+              //  videoStatusTextView.setText("onDataTrackUnsubscribed");
+            }
+
+            @Override
+            public void onDataTrackSubscriptionFailed(RemoteParticipant remoteParticipant,
+                                                      RemoteDataTrackPublication remoteDataTrackPublication,
+                                                      TwilioException twilioException) {
+                
+               // videoStatusTextView.setText("onDataTrackSubscriptionFailed");
+            }
+
+            @Override
+            public void onVideoTrackSubscribed(RemoteParticipant remoteParticipant,
+                                               RemoteVideoTrackPublication remoteVideoTrackPublication,
+                                               RemoteVideoTrack remoteVideoTrack) {
+              
+              //  videoStatusTextView.setText("onVideoTrackSubscribed");
+                addParticipantVideo(remoteVideoTrack);
+            }
+
+            @Override
+            public void onVideoTrackUnsubscribed(RemoteParticipant remoteParticipant,
+                                                 RemoteVideoTrackPublication remoteVideoTrackPublication,
+                                                 RemoteVideoTrack remoteVideoTrack) {
+              //  videoStatusTextView.setText("onVideoTrackUnsubscribed");
+                removeParticipantVideo(remoteVideoTrack);
+            }
+
+            @Override
+            public void onVideoTrackSubscriptionFailed(RemoteParticipant remoteParticipant,
+                                                       RemoteVideoTrackPublication remoteVideoTrackPublication,
+                                                       TwilioException twilioException) {
+              
+              //  videoStatusTextView.setText("onVideoTrackSubscriptionFailed");
+              
+            }
+
+            @Override
+            public void onAudioTrackEnabled(RemoteParticipant remoteParticipant,
+                                            RemoteAudioTrackPublication remoteAudioTrackPublication) {
 
             }
 
             @Override
-            public void onAudioTrackDisabled(Participant participant, AudioTrack audioTrack) {
+            public void onAudioTrackDisabled(RemoteParticipant remoteParticipant,
+                                             RemoteAudioTrackPublication remoteAudioTrackPublication) {
 
             }
 
             @Override
-            public void onVideoTrackEnabled(Participant participant, VideoTrack videoTrack) {
+            public void onVideoTrackEnabled(RemoteParticipant remoteParticipant,
+                                            RemoteVideoTrackPublication remoteVideoTrackPublication) {
 
             }
 
             @Override
-            public void onVideoTrackDisabled(Participant participant, VideoTrack videoTrack) {
+            public void onVideoTrackDisabled(RemoteParticipant remoteParticipant,
+                                             RemoteVideoTrackPublication remoteVideoTrackPublication) {
 
             }
         };
     }
-
+	
     private DialogInterface.OnClickListener connectClickListener(final EditText roomEditText) {
         return new DialogInterface.OnClickListener() {
 
