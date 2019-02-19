@@ -40,6 +40,7 @@ import com.twilio.video.Room;
 import com.twilio.video.VideoTrack;
 import com.twilio.video.VideoView;
 
+import com.twilio.video.RoomState;
 import com.twilio.video.RemoteVideoTrack;
 import com.twilio.video.RemoteDataTrack;
 import com.twilio.video.RemoteAudioTrack;
@@ -225,7 +226,7 @@ public class ConversationActivity extends AppCompatActivity {
          * Always disconnect from the room before leaving the Activity to
          * ensure any memory allocated to the Room resource is freed.
          */
-        if (room != null && room.getState() != Room.State.DISCONNECTED) {
+        if (room != null && room.getState() != RoomState.DISCONNECTED) {
             room.disconnect();
             disconnectedFromOnDestroy = true;
         }
