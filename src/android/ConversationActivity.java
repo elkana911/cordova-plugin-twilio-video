@@ -203,7 +203,7 @@ public class ConversationActivity extends AppCompatActivity {
              * the track has been removed.
              */
             if (localParticipant != null) {
-                localParticipant.removeVideoTrack(localVideoTrack);
+                localParticipant.unpublishTrack(localVideoTrack);
             }
 
             localVideoTrack.release();
