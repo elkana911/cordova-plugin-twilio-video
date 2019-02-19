@@ -465,7 +465,7 @@ public class ConversationActivity extends AppCompatActivity {
                 videoStatusTextView.setText("Waiting on other participant to join");
                 setTitle(room.getName());
 
-                for (Participant participant : room.getParticipants()) {
+                for (RemoteParticipant participant : room.getRemoteParticipants()) {
                     addParticipant(participant);
                     break;
                 }
