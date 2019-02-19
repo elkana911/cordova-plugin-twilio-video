@@ -1,7 +1,12 @@
 repositories {
     jcenter()
 }
-
+android {
+compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+        }
+}
 
 dependencies {
     compile 'com.twilio:video-android:3.2.2'
