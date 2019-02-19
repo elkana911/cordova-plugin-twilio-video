@@ -420,14 +420,21 @@ public class ConversationActivity extends AppCompatActivity {
         if (!participant.getIdentity().equals(participantIdentity)) {
             return;
         }
-
-        /*
-         * Remove participant renderer
+	    
+	 /*
+         * Remove remote participant renderer
          */
-        if (participant.getVideoTracks().size() > 0) {
-            removeParticipantVideo(participant.getVideoTracks().get(0));
-        }
-        participant.setListener(null);
+        if (!participant.getRemoteVideoTracks().isEmpty()) {
+            RemoteVideoTrackPublication remoteVideoTrackPublication =
+                    participant.getRemoteVideoTracks().get(0);
+
+            /*
+             * Remove video only if subscribed to participant track
+             */
+            if (remoteVideoTrackPublication.isTrackSubscribed()) {
+                removeParticipantVideo(remoteVideoTrackPublication.getRemoteVideoTrack());
+            }
+        }    
         moveLocalVideoToPrimaryView();
     }
 
