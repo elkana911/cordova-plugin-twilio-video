@@ -515,7 +515,7 @@ public class ConversationActivity extends AppCompatActivity {
         };
     }
 
-    private RemoteParticipant.Listener remoteParticipantListener() {
+    private RemoteParticipant.Listener participantListener() {
         return new RemoteParticipant.Listener() {
             @Override
             public void onAudioTrackPublished(RemoteParticipant remoteParticipant,
