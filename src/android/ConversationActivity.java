@@ -491,13 +491,13 @@ public class ConversationActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onParticipantConnected(Room room, Participant participant) {
+            public void onParticipantConnected(Room room, RemoteParticipant participant) {
                 addParticipant(participant);
 
             }
 
             @Override
-            public void onParticipantDisconnected(Room room, Participant participant) {
+            public void onParticipantDisconnected(Room room, RemoteParticipant participant) {
                 videoStatusTextView.setText("Participant disconnected");
                 removeParticipant(participant);
             }
