@@ -40,6 +40,7 @@ import com.twilio.video.Room;
 import com.twilio.video.VideoTrack;
 import com.twilio.video.VideoView;
 
+import com.twilio.video.RemoteAudioTrack;
 import com.twilio.video.RemoteAudioTrackPublication;
 import com.twilio.video.RemoteVideoTrackPublication;
 import com.twilio.video.RemoteDataTrackPublication;
